@@ -73,7 +73,7 @@ echo %CONV_V2_TO_V3_CMD%
 
 SET CONV_V2_TO_V3_CMD_TEMPFILE=%~dp0nunit3args.txt
 
-%CONV_V2_TO_V3_CMD% >%CONV_V2_TO_V3_CMD_TEMPFILE%
+%CONV_V2_TO_V3_CMD% >"%CONV_V2_TO_V3_CMD_TEMPFILE%"
 
 IF ERRORLEVEL 1 (
   echo Error converting args to nunit 3 test selection language, the nunit3-console --where argument
@@ -82,7 +82,7 @@ IF ERRORLEVEL 1 (
   exit /b 1
 )
 
-set /p TTAGS_NUNIT_WHERE=<%CONV_V2_TO_V3_CMD_TEMPFILE%
+set /p TTAGS_NUNIT_WHERE=<"%CONV_V2_TO_V3_CMD_TEMPFILE%"
 if not '!TTAGS_NUNIT_WHERE!' == '' (set TTAGS_NUNIT_WHERE=--where "!TTAGS_NUNIT_WHERE!")
 
 del /Q "%CONV_V2_TO_V3_CMD_TEMPFILE%"

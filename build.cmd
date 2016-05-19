@@ -300,13 +300,13 @@ if '%RestorePackages%' == 'true' (
 )
 
 :: Restore the Tools directory
-call %~dp0init-tools.cmd
+call "%~dp0init-tools.cmd"
 
 set _dotnetexe=%~dp0Tools\dotnetcli\dotnet.exe
-pushd .\lkg & %_dotnetexe% restore &popd
+pushd .\lkg & "%_dotnetexe%" restore &popd
 @if ERRORLEVEL 1 echo Error: dotnet restore failed  && goto :failure
 
-pushd .\lkg & %_dotnetexe% publish project.json &popd
+pushd .\lkg & "%_dotnetexe%" publish project.json &popd
 @if ERRORLEVEL 1 echo Error: dotnet publish failed  && goto :failure
 
 rem rename fsc and coreconsole to allow fsc.exe to to start compiler
@@ -327,7 +327,7 @@ fc fsi.exe corehost.exe >nul
 )
 popd
 
-rem copy targestfile into tools directory ... temporary fix until packaging complete.
+rem copy targetsfile into tools directory ... temporary fix until packaging complete.
 copy src\fsharp\FSharp.Build\Microsoft.FSharp.targets tools\Microsoft.FSharp.targets
 copy src\fsharp\FSharp.Build\Microsoft.Portable.FSharp.targets tools\Microsoft.Portable.FSharp.targets
 
